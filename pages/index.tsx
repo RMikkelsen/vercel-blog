@@ -2,25 +2,48 @@ import React from "react"
 import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
+import prisma from "../lib/prisma"
 
+// this commented out is the hardcoded feed object , replaced with a proper call to the database 
+// export const getStaticProps: GetStaticProps = async () => {
+//   const feed = [
+//     {
+//       id: "1",
+//       title: "Prisma is the perfect ORM for Next.js",
+//       content: "[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!",
+//       published: false,
+//       author: {
+//         name: "Nikolas Burk",
+//         email: "burk@prisma.io",
+//       },
+//     },
+//   ]
+//   return { 
+//     props: { feed }, 
+//     revalidate: 10 
+//   }
+// }
+
+
+
+//The two things to note about the Prisma Client query:
+
+// A where filter is specified to include only Post records where published is true
+// The name of the author of the Post record is queried as well and will be included in the returned objects
 export const getStaticProps: GetStaticProps = async () => {
-  const feed = [
-    {
-      id: "1",
-      title: "Prisma is the perfect ORM for Next.js",
-      content: "[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!",
-      published: false,
+  const feed = await prisma.post.findMany({
+    where: { published: true },
+    include: {
       author: {
-        name: "Nikolas Burk",
-        email: "burk@prisma.io",
+        select: { name: true },
       },
     },
-  ]
-  return { 
-    props: { feed }, 
-    revalidate: 10 
-  }
-}
+  });
+  return {
+    props: { feed },
+    revalidate: 10,
+  };
+};
 
 type Props = {
   feed: PostProps[]
