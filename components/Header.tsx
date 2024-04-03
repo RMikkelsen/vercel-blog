@@ -14,6 +14,7 @@ const Header: React.FC = () => {
           Feed
         </a>
       </Link>
+      
       <style jsx>{`
         .bold {
           font-weight: bold;
