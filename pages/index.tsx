@@ -4,7 +4,7 @@ import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import prisma from "../lib/prisma"
 
-// this commented out is the hardcoded feed object , replaced with a proper call to the database 
+// this commented out is the hardcoded feed object , replaced with a proper call to the database
 // export const getStaticProps: GetStaticProps = async () => {
 //   const feed = [
 //     {
@@ -18,9 +18,9 @@ import prisma from "../lib/prisma"
 //       },
 //     },
 //   ]
-//   return { 
-//     props: { feed }, 
-//     revalidate: 10 
+//   return {
+//     props: { feed },
+//     revalidate: 10
 //   }
 // }
 
@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 type Props = {
-  feed: PostProps[]
+  feed: PostProps[],
 }
 
 const Blog: React.FC<Props> = (props) => {
