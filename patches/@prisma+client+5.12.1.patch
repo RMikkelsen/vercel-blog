@@ -4,10 +4,10 @@ index dc3ab81..d95c19c 100644
 +++ b/node_modules/@prisma/client/runtime/library.d.ts
 @@ -1325,7 +1325,7 @@ export declare type GetCountResult<A> = A extends {
  declare function getExtensionContext<T>(that: T): Context_2<T>;
- 
+
  export declare type GetFindResult<P extends OperationPayload, A> = Equals<A, any> extends 1 ? DefaultSelection<P> : A extends {
 -    select: infer S extends object;
 +    select: infer S extends object | undefined;
  } & Record<string, unknown> | {
      include: infer I extends object;
- } & Record<string, unknown> ? {
+ } & Record<string, unknown> ? {}

@@ -6,29 +6,22 @@ const Draft: React.FC = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-// In this code, you're using the title and content properties that are extracted from the component 
-// state using useState and submit them via an HTTP POST request to the api/post API route.
-
-//   When submitted, submitData function is called. In that function, you need to pass the data from 
-//   the React component to an API route which can then handle the actual storage of the new post data in the database.
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-        const body = { title, content };
-        await fetch('/api/post', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
-        await Router.push('/drafts');
-      } catch (error) {
-        console.error(error);
-      }
-   
+      const body = { title, content };
+      await fetch('/api/post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      await Router.push('/drafts');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    // Layout is a wrapper component that includes the Header component
     <Layout>
       <div>
         <form onSubmit={submitData}>
